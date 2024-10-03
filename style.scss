@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.hovermain:hover {
+    background-color: rgb(56, 56, 52);
+}
+.hoverBttSpecial:hover {
+    background-color: blue;
+}
+.close:hover {
+    background-color: red;
+}
+.img {
+    width: 15px;
+    margin-left: 15px;
+    margin-left: 15px;
+}
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    border: 1px solid black;
+    width: 320px !important;
+    background-color: rgb(44, 41, 41);
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        &--name {
+            display: flex;
+            justify-content: space-between;
+            p {
+                color: white;
+            }
+        }
+        &--icon {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__screen {
+        margin-top: 15px;
+        width: 100%;
+        height: 80px;
+        margin-bottom: 5px;
+        &--clock {
+            display: flex;
+            justify-content: right;
+            width: 100%;
+            img {
+                width: 20px;
+
+                align-items: center;
+            }
+        }
+    }
+    &__groupbutton {
+        width: 320px !important;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.button {
+    background-color: rgb(32, 30, 30);
+    color: white;
+    border-radius: 3px;
+    width: 80px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(43, 42, 42);
+}
+.buttonNumber {
+    background-color: rgb(10, 9, 9);
+}
+
+.buttonEqual {
+    background-color: rgb(86, 5, 5);
+}
+
+
+#context__input{
+    margin-top: 7px;
+    height: 20px;
+   text-align: end;
+   font-size: smaller;
+    visibility: hidden;
+    margin-right: 10px;
+  
+}
+
+#context {
+ text-align: end;
+ margin-top: 5px;
+ height: 20px;
+ font-size: 28px;
+visibility: hidden;
+margin-right: 10px;
+
+
+}
