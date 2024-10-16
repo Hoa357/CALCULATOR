@@ -87,14 +87,15 @@ const getValue = (id) => {
 
       print(value, numberAndSign);
       dau = 0;
-    } else if (number1 != "" && dau == 0) {
+    } 
+    else if (number1 != "" && dau == 0) {
       number2 = "";
       numberAndSign = number1 + " " + id + " ";
       symbol = id;
       dau += 1;
 
       print(number1, numberAndSign);
-    }
+    } 
 
     if (dau != 0) {
       symbol = id;
@@ -129,7 +130,7 @@ const getValue = (id) => {
       ///////////// CE ////////////////
 
       if (id == charClear) {
-        console.log("VO DAY HẢ");
+        
         numberAndSign = numberAndSign.replace(number2, "0");
 
         number2 = "0";
@@ -140,7 +141,7 @@ const getValue = (id) => {
         if (id === charDelete) {
           number2 = number2.slice(0, -1);
           numberAndSign = numberAndSign.slice(0, -1);
-          id = number2;
+         
         } else if (number2 === "0") {
           number2 = id;
           numberAndSign += id;
@@ -152,8 +153,8 @@ const getValue = (id) => {
 
       displayNumber(number2);
     } else {
-      if (dau == 0 && id == charClear) {
-        console.log("vo CE NHA");
+      if ( id == charClear) {
+       
 
         displayNumber(0);
         setDefault();
@@ -200,7 +201,9 @@ const calculate = (a, b, element) => {
     }
 
     default:
-      return "Invalid operator";
+      displayNumber(Soa);
+      break;
+     
   }
 };
 
@@ -220,7 +223,7 @@ const containerButton = () => {
       getValue(element);
     });
     button.classList.add("button", "hovermain");
-    // button.setAttribute("id",element)
+   
     for (let i = 0; i < stringnumber.length; i++) {
       if (element.includes(stringnumber[i])) {
         button.classList.add("buttonNumber", "hovermain");
