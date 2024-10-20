@@ -1,3 +1,4 @@
+
 const stringsymbol = ["+", "-", "/", "x", "="];
 const stringnumber = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"];
 const arrayButton = [
@@ -32,7 +33,7 @@ var symbol = "";
 
 let dau = 0;
 var numberAndSign = "";
-
+// Hàm lấy giá trị kết quả
 const displayNumber = (num) => {
   const text = document.getElementById("context");
   if (text) {
@@ -42,6 +43,7 @@ const displayNumber = (num) => {
   }
 };
 
+// Hàm lấy giá trị phép tính
 const displayNumberAndSign = (num) => {
   const text = document.getElementById("context__input");
   if (text) {
@@ -51,6 +53,7 @@ const displayNumberAndSign = (num) => {
   }
 };
 
+// Hàm đưa về giá trị mặc định 
 const setDefault = () => {
   number1 = "";
   number2 = "";
@@ -59,13 +62,18 @@ const setDefault = () => {
   dau = 0;
 };
 
+// Hàm in ra giá trị phép tính và kết quả phép tính
+
 const print = (printnumber, printnumberandsign) => {
   displayNumberAndSign(printnumberandsign);
   displayNumber(printnumber);
 };
 
+
+// Hàm lấy giá trị 
 const getValue = (id) => {
-  ////////// Clear C //////////////////
+  
+  // Kiểm tra có phải button C//
   if (id == charClearAll) {
     print(0, " ");
 
@@ -73,21 +81,27 @@ const getValue = (id) => {
 
     return;
   }
+
+  // Kiểm tra id có phải là dấu //
+      // Nếu Id là dấu //
   if (stringsymbol.includes(id)) {
     let oldSymbol = symbol;
+     // Nếu id là dấu = //
     if (id == charResult) {
+       // TH1 - Phép tính kết thúc là dấu -
       if (number2 == "") {
         number2 = number1;
       }
+      // TH2 - Phép tính kết thúc là số -
       let value = calculate(number1, number2, oldSymbol);
-
-      number1 = value;
-
+      
+      number1 = value.toString();
       numberAndSign = "";
-
       print(value, numberAndSign);
       dau = 0;
     } 
+     // Nếu id là không dấu = //
+     // Xử lý lưu trữ bình thường //
     else if (number1 != "" && dau == 0) {
       number2 = "";
       numberAndSign = number1 + " " + id + " ";
@@ -97,10 +111,10 @@ const getValue = (id) => {
       print(number1, numberAndSign);
     } 
 
+    // Kiểm tra dấu khác lần nhập đầu //
     if (dau != 0) {
       symbol = id;
 
-      //////////////
       const lastChar = numberAndSign[numberAndSign.length - 2];
       // Kiểm tra xem cả hai ký tự đều là phép toán
       if (
@@ -109,35 +123,35 @@ const getValue = (id) => {
         id != charResult
       ) {
         // Xóa ký tự kế cuối
-
         numberAndSign = numberAndSign.replace(lastChar, id);
       } else {
         numberAndSign += " " + id + " ";
       }
 
       displayNumberAndSign(numberAndSign);
-
+      // Thực hiện logic bình thường //
       if (number2 != "") {
         let value = calculate(number1, number2, oldSymbol);
         number2 = "";
-        number1 = value;
+        number1 = value.toString();
 
         displayNumber(value);
       }
     }
   } else {
+    // Nếu id không là dấu //
+    // Kiểm tra Symbol có lưu trữ dấu chưa => number2 //
     if (symbol !== "") {
-      ///////////// CE ////////////////
-
+      
+      // Kiểm tra có phải là nút CE //
       if (id == charClear) {
         
         numberAndSign = numberAndSign.replace(number2, "0");
-
         number2 = "0";
       } else {
         dau += 1;
 
-        //// delete
+        // Kiểm tra có phải là nút Delete //
         if (id === charDelete) {
           number2 = number2.slice(0, -1);
           numberAndSign = numberAndSign.slice(0, -1);
@@ -153,28 +167,33 @@ const getValue = (id) => {
 
       displayNumber(number2);
     } else {
+        // Kiểm tra có phải là nút CE //
       if ( id == charClear) {
-       
-
-        displayNumber(0);
+         number1 = "0";
+        displayNumber(number1);
         setDefault();
-
+       
         return;
       }
+      else {
+        dau += 1;
 
-      dau += 1;
-      /// delete
+     
+     // Kiểm tra có phải là nút Delete //
       if (id === charDelete) {
         number1 = number1.slice(0, -1);
         numberAndSign = numberAndSign.slice(0, -1);
-      } else {
+      }
+       else if (number1 === "0") {
+          number2 = id;
+          numberAndSign += id;
+        } else {
         number1 += id;
         numberAndSign += id;
       }
 
       if ((id = charResult)) {
         displayNumber(number1);
-
         return;
       } else if (dau != 0) {
         print(number1, numberAndSign);
@@ -183,8 +202,13 @@ const getValue = (id) => {
       }
     }
   }
+  }
 };
 
+
+
+
+// Hàm máy tính 
 const calculate = (a, b, element) => {
   const Soa = Number(a);
   const Sob = Number(b);
@@ -207,6 +231,7 @@ const calculate = (a, b, element) => {
   }
 };
 
+// Hàm tạo ra các nút button
 const containerButton = () => {
   const element = document.getElementById("groupButton");
 
@@ -245,3 +270,9 @@ const containerButton = () => {
 };
 
 containerButton();
+
+
+/// LOGIC Tính 2 số   ///
+/// Number 1 = value(number1 + number2) , sau 1 dấu là giá trị của number2 ( number2 = " ") /////
+/// Dùng symbol lưu trữ dấu ///
+///
